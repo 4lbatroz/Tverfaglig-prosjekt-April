@@ -15,27 +15,20 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Adventure")
 
 # Opprett spilleren
-player = pygame.Rect(20, 20, 20, 20)
-player_speed = 1
-
-# Oppretter alle fire poraler
-# top_portal og bottom_portal
-top_portal_width = 200
-top_portal_height = 30
-top_portal_x = (SCREEN_WIDTH - top_portal_width) // 2
-top_portal_y_room1 = 0
-top_portal_y_room2 = SCREEN_HEIGHT - top_portal_height
-top_portal1 = pygame.Rect(top_portal_x, top_portal_y_room1, top_portal_width, top_portal_height)
-bottom_portal2 = pygame.Rect(top_portal_x, top_portal_y_room2, top_portal_width, top_portal_height)
-
-#Left og Right portal
-left_portal_width = 30
-left_portal_height = 200
-left_portal_x = 0
-left_portal_y_room1 = (SCREEN_WIDTH - left_portal_height) // 2
-left_portal_y_room3 = SCREEN_HEIGHT - left_portal_height
-left_portal1 = pygame.Rect(left_portal_x, left_portal_y_room1, left_portal_width, left_portal_height)
-right_portal3 = pygame.Rect(SCREEN_WIDTH - left_portal_width, left_portal_y_room3, left_portal_width, left_portal_height)
+player =
+class Sprite(pygame.sprite.Sprite) : 
+            def __init_(self, color, height, widht):
+                super().__init__() 
+  
+                self.image = pygame.Surface([width, height]) 
+                self.image.fill(SURFACE_COLOR) 
+                self.image.set_colorkey(COLOR) 
+        
+                pygame.draw.rect(self.image, 
+                                color, 
+                                pygame.Rect(0, 0, width, height)) 
+        
+                self.rect = self.image.get_rect() 
 
 # Opprett vegger for første rom
 wall_thickness = 30
@@ -44,12 +37,29 @@ room1_bottom_wall = pygame.Rect(0, SCREEN_HEIGHT - wall_thickness, SCREEN_WIDTH,
 room1_left_wall = pygame.Rect(0, 0, wall_thickness, SCREEN_HEIGHT)
 room1_right_wall = pygame.Rect(SCREEN_WIDTH - wall_thickness, 0, wall_thickness, SCREEN_HEIGHT)
 
+# Opprett åpning (portal) for å koble rommene sammen
+portal_width = 200
+portal_height = 30
+portal_x = (SCREEN_WIDTH - portal_width) // 2
+portal_y_room1 = 0
+portal_y_room2 = SCREEN_HEIGHT - portal_height
+portal1 = pygame.Rect(portal_x, portal_y_room1, portal_width, portal_height)
+portal2 = pygame.Rect(portal_x, portal_y_room2, portal_width, portal_height)
 
 # Opprett vegger for andre rom
 room2_top_wall = pygame.Rect(0, 0, SCREEN_WIDTH, wall_thickness)
 room2_bottom_wall = pygame.Rect(0, SCREEN_HEIGHT - wall_thickness, SCREEN_WIDTH, wall_thickness)
 room2_right_wall = pygame.Rect(SCREEN_WIDTH - wall_thickness, 0, wall_thickness, SCREEN_HEIGHT)
 room2_left_wall = pygame.Rect(0, SCREEN_HEIGHT // 2, wall_thickness, SCREEN_HEIGHT // 2)
+
+# Opprett åpning (portal) for å bytte rom mellom 2 og 3
+room2_portal_width = 30
+room2_portal_height = SCREEN_HEIGHT
+room2_portal_x_left = 0
+room2_portal_x_right = SCREEN_WIDTH - room2_portal_width
+room2_portal_y = 0
+room2_portal1 = pygame.Rect(room2_portal_x_left, room2_portal_y, room2_portal_width, room2_portal_height)
+room2_portal2 = pygame.Rect(room2_portal_x_right, room2_portal_y, room2_portal_width, room2_portal_height)
 
 # Opprett vegger for tredje rom
 room3_top_wall = pygame.Rect(0, 0, SCREEN_WIDTH, wall_thickness)
@@ -75,13 +85,13 @@ while running:
         pygame.draw.rect(screen, BLACK, room1_bottom_wall)
         pygame.draw.rect(screen, BLACK, room1_left_wall)
         pygame.draw.rect(screen, BLACK, room1_right_wall)
-        pygame.draw.rect(screen, WHITE, top_portal1)  # Tegn åpning (portal)
+        pygame.draw.rect(screen, WHITE, portal1)  # Tegn åpning (portal)
     elif current_room == 2:
         pygame.draw.rect(screen, BLACK, room2_top_wall)
         pygame.draw.rect(screen, BLACK, room2_bottom_wall)
         pygame.draw.rect(screen, BLACK, room2_left_wall)
         pygame.draw.rect(screen, BLACK, room2_right_wall)
-        pygame.draw.rect(screen, WHITE, bottom_portal2)  # Tegn åpning (portal)
+        pygame.draw.rect(screen, WHITE, portal2)  # Tegn åpning (portal)
         pygame.draw.rect(screen, WHITE, room2_portal1)  # Tegn portal
         pygame.draw.rect(screen, WHITE, room2_portal2)  # Tegn portal
     elif current_room == 3:
@@ -114,12 +124,12 @@ while running:
         player.y += player_speed
 
     # Sjekk om spilleren går gjennom portalen for å bytte rom
-    if current_room == 1 and player.colliderect(top_portal1):
+    if current_room == 1 and player.colliderect(portal1):
         current_room = 2
-        player.y = top_portal_y_room2 + top_portal_height + 1
-    elif current_room == 2 and player.colliderect(bottom_portal2):
+        player.y = portal_y_room2 + portal_height + 1
+    elif current_room == 2 and player.colliderect(portal2):
         current_room = 1
-        player.y = top_portal_y_room1 - player.height - 1
+        player.y = portal_y_room1 - player.height - 1
     elif current_room == 2 and player.colliderect(room2_portal1):
         current_room = 3
         player.x = room2_portal_x_right + 1
