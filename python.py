@@ -15,20 +15,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Adventure")
 
 # Opprett spilleren
-player =
-class Sprite(pygame.sprite.Sprite) : 
-            def __init_(self, color, height, widht):
-                super().__init__() 
-  
-                self.image = pygame.Surface([width, height]) 
-                self.image.fill(SURFACE_COLOR) 
-                self.image.set_colorkey(COLOR) 
-        
-                pygame.draw.rect(self.image, 
-                                color, 
-                                pygame.Rect(0, 0, width, height)) 
-        
-                self.rect = self.image.get_rect() 
+player = pygame.Rect(100, 100, 50, 50)
+player_speed = 1
 
 # Opprett vegger for første rom
 wall_thickness = 30
