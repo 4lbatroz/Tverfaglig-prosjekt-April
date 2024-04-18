@@ -15,7 +15,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Adventure")
 
 # Opprett spilleren
-player = pygame.Rect(100, 100, 50, 50)
+player = pygame.Rect(50, 50, 25, 25)
 player_speed = 1
 
 # Opprett åpning (portal) for å koble rommene sammen

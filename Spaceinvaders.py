@@ -9,8 +9,8 @@ pygame.init()
 # creating screen
 screen_width = 800
 screen_height = 600
-screen = pygame.display.set_mode((screen_width,
-								screen_height))
+screen = pygame.display.set_mode((screen_width,screen_height))
+WHITE = (255, 255, 255)
 
 # caption and icon
 pygame.display.set_caption("Welcome to Space\
@@ -38,11 +38,11 @@ def game_over():
 	screen.blit(game_over_text, (190, 250))
 
 # Background Sound
-mixer.music.load('data/background.wav')
+mixer.music.load('A Horse with No Name - America.mp3')
 mixer.music.play(-1)
 
 # player
-playerImage = pygame.image.load('data/spaceship.png')
+playerImage = pygame.image.load('transport.png')
 player_X = 370
 player_Y = 523
 player_Xchange = 0
@@ -56,7 +56,7 @@ invader_Ychange = []
 no_of_invaders = 8
 
 for num in range(no_of_invaders):
-	invaderImage.append(pygame.image.load('data/alien.png'))
+	invaderImage.append(pygame.image.load('boy.png'))
 	invader_X.append(random.randint(64, 737))
 	invader_Y.append(random.randint(30, 180))
 	invader_Xchange.append(1.2)
@@ -65,7 +65,7 @@ for num in range(no_of_invaders):
 # Bullet
 # rest - bullet is not moving
 # fire - bullet is moving
-bulletImage = pygame.image.load('data/bullet.png')
+bulletImage = pygame.image.load('meth.jpeg')
 bullet_X = 0
 bullet_Y = 500
 bullet_Xchange = 0
@@ -115,7 +115,7 @@ while running:
 				if bullet_state is "rest":
 					bullet_X = player_X
 					bullet(bullet_X, bullet_Y)
-					bullet_sound = mixer.Sound('data/bullet.wav')
+					bullet_sound = mixer.Sound('9mm-pistol-shot-6349.mp3')
 					bullet_sound.play()
 		if event.type == pygame.KEYUP:
 			player_Xchange = 0
@@ -140,7 +140,7 @@ while running:
 			if abs(player_X-invader_X[i]) < 80:
 				for j in range(no_of_invaders):
 					invader_Y[j] = 2000
-					explosion_sound = mixer.Sound('data/explosion.wav')
+					explosion_sound = mixer.Sound('Breaking Bad - Tuco Salamanca “This kicks like a mule with his balls wrapped in duct tape” - Assorted Tom.mp3')
 					explosion_sound.play()
 				game_over()
 				break
