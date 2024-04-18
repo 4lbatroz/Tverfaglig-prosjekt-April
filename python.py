@@ -5,8 +5,8 @@ import sys
 pygame.init()
 
 # Definer konstanter
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 800
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
@@ -17,6 +17,24 @@ pygame.display.set_caption("Adventure")
 # Opprett spilleren
 player = pygame.Rect(100, 100, 50, 50)
 player_speed = 1
+
+# Opprett åpning (portal) for å koble rommene sammen
+portal_width = 200
+portal_height = 30
+portal_x = (SCREEN_WIDTH - portal_width) // 2
+portal_y_room1 = 0
+portal_y_room2 = SCREEN_HEIGHT - portal_height
+portal1 = pygame.Rect(portal_x, portal_y_room1, portal_width, portal_height)
+portal2 = pygame.Rect(portal_x, portal_y_room2, portal_width, portal_height)
+
+# Opprett åpning (portal) for å bytte rom mellom 2 og 3
+room2_portal_width = 30
+room2_portal_height = 760
+room2_portal_x_left = 0
+room2_portal_x_right = SCREEN_WIDTH - room2_portal_width
+room2_portal_y = 0
+room2_portal1 = pygame.Rect(room2_portal_x_left, room2_portal_y, room2_portal_width, room2_portal_height)
+room2_portal2 = pygame.Rect(room2_portal_x_right, room2_portal_y, room2_portal_width, room2_portal_height)
 
 # Opprett vegger for første rom
 wall_thickness = 30
