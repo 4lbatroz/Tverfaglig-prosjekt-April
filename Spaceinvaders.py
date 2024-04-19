@@ -10,7 +10,8 @@ pygame.init()
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width,screen_height))
-WHITE = (255, 255, 255)
+color = (255, 255, 255)
+screen.fill(color)
 
 # caption and icon
 pygame.display.set_caption("Welcome to Space\
@@ -56,7 +57,7 @@ invader_Ychange = []
 no_of_invaders = 8
 
 for num in range(no_of_invaders):
-	invaderImage.append(pygame.image.load('boy.png'))
+	invaderImage.append(pygame.image.load('hector.jpeg'))
 	invader_X.append(random.randint(64, 737))
 	invader_Y.append(random.randint(30, 180))
 	invader_Xchange.append(1.2)
@@ -140,7 +141,7 @@ while running:
 			if abs(player_X-invader_X[i]) < 80:
 				for j in range(no_of_invaders):
 					invader_Y[j] = 2000
-					explosion_sound = mixer.Sound('Breaking Bad - Tuco Salamanca “This kicks like a mule with his balls wrapped in duct tape” - Assorted Tom.mp3')
+					explosion_sound = mixer.Sound('nam.mp3')
 					explosion_sound.play()
 				game_over()
 				break
