@@ -14,8 +14,7 @@ color = (255, 255, 255)
 screen.fill(color)
 
 # caption and icon
-pygame.display.set_caption("Welcome to Space\
-Invaders Game by:- styles")
+pygame.display.set_caption("Welcome to Albuquerque New Mexico")
 
 
 # Score
@@ -34,8 +33,7 @@ def show_score(x, y):
 	screen.blit(score, (x , y ))
 
 def game_over():
-	game_over_text = game_over_font.render("GAME OVER",
-										True, (255,255,255))
+	game_over_text = game_over_font.render("GAME OVER",True, (255,255,255))
 	screen.blit(game_over_text, (190, 250))
 
 # Background Sound
@@ -43,10 +41,12 @@ mixer.music.load('A Horse with No Name - America.mp3')
 mixer.music.play(-1)
 
 # player
-playerImage = pygame.image.load('transport.png')
-player_X = 370
-player_Y = 523
+playerImage = pygame.image.load('car.png')
+playerImage = pygame.transform.scale(playerImage, (80, 80))
+player_X = 0
+player_Y = 500
 player_Xchange = 0
+
 
 # Invader
 invaderImage = []
@@ -58,6 +58,7 @@ no_of_invaders = 8
 
 for num in range(no_of_invaders):
 	invaderImage.append(pygame.image.load('hector.jpeg'))
+	invaderImage[num] = pygame.transform.scale(invaderImage[num], (70, 70))
 	invader_X.append(random.randint(64, 737))
 	invader_Y.append(random.randint(30, 180))
 	invader_Xchange.append(0.2)
@@ -67,10 +68,11 @@ for num in range(no_of_invaders):
 # rest - bullet is not moving
 # fire - bullet is moving
 bulletImage = pygame.image.load('meth.jpeg')
+bulletImage = pygame.transform.scale(bulletImage, (50, 50))
 bullet_X = 0
 bullet_Y = 500
 bullet_Xchange = 0
-bullet_Ychange = 3
+bullet_Ychange = 0.5
 bullet_state = "rest"
 
 # Collision Concept
