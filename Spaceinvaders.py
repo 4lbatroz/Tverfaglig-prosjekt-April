@@ -126,6 +126,7 @@ while running:
                 for j in range(no_of_invaders):
                     invader_Y[j] = 2000
                 game_over_flag = True
+                
 
         if invader_X[i] >= 735 or invader_X[i] <= 0:
             invader_Xchange[i] *= -1
@@ -139,7 +140,7 @@ while running:
             invader_X[i] = random.randint(64, 736)
             invader_Y[i] = random.randint(30, 200)
             invader_Xchange[i] *= -1
-
+            
         invader(invader_X[i], invader_Y[i], i)
 
     if player_X <= 16:
