@@ -89,6 +89,10 @@ def bullet(x, y):
     screen.blit(bulletImage, (x, y))
     bullet_state = "fire"
 
+# Legg til en teller for å holde styr på antall iterasjoner
+invader_spawn_timer = 0
+spawn_interval = 100  # 600 iterasjoner tilsvarer 10 sekunder med 60 oppdateringer per sekund
+
 # Spill-løkke
 running = True
 game_over_flag = False
@@ -96,6 +100,9 @@ game_over_flag = False
 while running:
 
     screen.fill((0, 0, 0))
+
+    # Øk telleren i hver iterasjon
+    invader_spawn_timer += 1
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -142,6 +149,19 @@ while running:
             invader_Xchange[i] *= -1
             
         invader(invader_X[i], invader_Y[i], i)
+
+    # Legg til en ny invader hvis det er tid
+    if invader_spawn_timer >= spawn_interval:
+        # Legg til en ny invader
+        invaderImage.append(pygame.image.load('hector.jpeg'))
+        invaderImage[-1] = pygame.transform.scale(invaderImage[-1], (70, 70))
+        invader_X.append(random.randint(64, 737))
+        invader_Y.append(random.randint(30, 180))
+        invader_Xchange.append(0.2)
+        invader_Ychange.append(50)
+
+        # Tilbakestill telleren
+        invader_spawn_timer = 0
 
     if player_X <= 16:
         player_X = 16
