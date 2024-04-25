@@ -2,7 +2,20 @@ import pygame
 import random
 import math
 from pygame import mixer
+import pymysql.cursors
 
+connection = pymysql.connect(host='172.20.128.51',
+                             user='alfred',
+                             password='Skole123',
+                             database='balleknuser600',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
+
+
+def insert_score_val(score_val):
+    with connection.cursor() as cursor:
+        cursor.execute("INSERT INTO score_val (score) VALUES (%s)", (score_val,))
+    connection.commit()
 # Initialiserer Pygame
 pygame.init()
 
@@ -142,6 +155,7 @@ while running:
         collision = isCollision(bullet_X, invader_X[i], bullet_Y, invader_Y[i])
         if collision:
             score_val += 1
+            insert_score_val(score_val)
             bullet_Y = 600
             bullet_state = "rest"
             invader_X[i] = random.randint(64, 736)
@@ -180,5 +194,6 @@ while running:
     if bullet_state == "fire":
         bullet(bullet_X, bullet_Y)
         bullet_Y -= bullet_Ychange
+
 
     pygame.display.update()
